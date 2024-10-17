@@ -4,7 +4,7 @@ class DataBase:
 
     @staticmethod
     def get_date():
-        return str(datetime.datetime.now()).split('')[0]
+        return str(datetime.datetime.now()).split(' ')[0]
 
     def __init__(self, filename):
         self.filename = filename
@@ -18,7 +18,7 @@ class DataBase:
 
         for line in self.file:
             email, password, name, created = line.strip().split(';')
-            self.users['email'] = (name, password, created)
+            self.users[email] = (name, password, created)
 
         self.file.close()
 
@@ -30,7 +30,7 @@ class DataBase:
 
     def add_user(self, email, password, name):
         if email.strip() not in self.users:
-            self.users[email.strip()] = (password.stip(), name.strip(), DataBase.get_date())
+            self.users[email.strip()] = (password.strip(), name.strip(), DataBase.get_date())
 
     def validate(self, email, password):
         if self.get_user(email) != -1:
